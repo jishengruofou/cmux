@@ -67,7 +67,7 @@ int cmux_sample(void)
     }
     LOG_I("cmux object channel (%s) attach successful.", CMUX_PPP_NAME);
 end:
-    return RT_EOK;
+    return result;
 }
 #ifdef CMUX_ATUO_INITIZATION
 INIT_APP_EXPORT(cmux_sample);
