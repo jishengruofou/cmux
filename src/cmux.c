@@ -831,14 +831,14 @@ static rt_err_t cmux_vcom_close(rt_device_t dev)
  *
  * @return  the result
  */
-static rt_size_t cmux_vcom_write(struct rt_device *dev,
+static rt_ssize_t cmux_vcom_write(struct rt_device *dev,
                                  rt_off_t pos,
                                  const void *buffer,
                                  rt_size_t size)
 {
     struct cmux *cmux = RT_NULL;
     struct cmux_vcoms *vcom = (struct cmux_vcoms *)dev;
-    rt_size_t len;
+    rt_ssize_t len;
     cmux = _g_cmux;
 
     /* use virtual serial, we can write data into actual serial directly. */
@@ -856,7 +856,7 @@ static rt_size_t cmux_vcom_write(struct rt_device *dev,
  *
  * @return  the result
  */
-static rt_size_t cmux_vcom_read(struct rt_device *dev,
+static rt_ssize_t cmux_vcom_read(struct rt_device *dev,
                                 rt_off_t pos,
                                 void *buffer,
                                 rt_size_t size)
