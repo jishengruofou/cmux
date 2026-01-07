@@ -527,7 +527,7 @@ static void cmux_recv_processdata(struct cmux *cmux, rt_uint8_t *buf, rt_size_t 
  *
  * @return  length
  */
-static rt_size_t cmux_send_data(struct rt_device *dev, int port, rt_uint8_t type, const char *data, int length)
+static rt_ssize_t cmux_send_data(struct rt_device *dev, int port, rt_uint8_t type, const char *data, int length)
 {
     /* flag, EA=1 C port, frame type, data_length 1-2 */
     rt_uint8_t prefix[5] = {CMUX_HEAD_FLAG, CMUX_ADDRESS_EA | CMUX_ADDRESS_CR, 0, 0, 0};
@@ -649,12 +649,13 @@ rt_err_t cmux_init(struct cmux *object, const char *name, rt_uint8_t vcom_num, v
 
     object->vcom_num = vcom_num;
     object->vcoms = rt_malloc(vcom_num * sizeof(struct cmux_vcoms));
-    rt_memset(object->vcoms, 0, vcom_num * sizeof(struct cmux_vcoms));
+    
     if (object->vcoms == RT_NULL)
     {
         LOG_E("cmux vcoms malloc failed.");
         return -RT_ENOMEM;
     }
+    rt_memset(object->vcoms, 0, vcom_num * sizeof(struct cmux_vcoms));
 
     object->buffer = cmux_buffer_init();
     if (object->buffer == RT_NULL)
