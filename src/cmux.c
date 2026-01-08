@@ -77,7 +77,7 @@
 #endif
 #include <rtdbg.h>
 
-static rt_size_t cmux_send_data(struct rt_device *dev, int port, rt_uint8_t type, const char *data, int length);
+static rt_ssize_t cmux_send_data(struct rt_device *dev, int port, rt_uint8_t type, const char *data, int length);
 static rt_slist_t cmux_list = RT_SLIST_OBJECT_INIT(cmux_list);
 /* only one cmux object can be created */
 static struct cmux *_g_cmux = RT_NULL;
